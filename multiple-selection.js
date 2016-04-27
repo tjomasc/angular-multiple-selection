@@ -54,12 +54,12 @@
 
                     element.on('mousedown', function(event) {
                         if (element.scope().isSelected) {
-                            if (event.ctrlKey) {
+                            if (event.shiftKey) {
                                 element.scope().isSelected = false;
                                 element.scope().$apply();
                             }
                         } else {
-                            if (!event.ctrlKey) {
+                            if (!event.shiftKey) {
                                 var childs = getSelectableElements(element.parent());
                                 for (var i = 0; i < childs.length; i++) {
                                     if (childs[i].scope().isSelectable) {
@@ -199,7 +199,7 @@
                             if (childs[i].scope().isSelecting === true) {
                                 childs[i].scope().isSelecting = false;
 
-                                childs[i].scope().isSelected = event.ctrlKey ? !childs[i].scope().isSelected : true;
+                                childs[i].scope().isSelected = event.shiftKey ? !childs[i].scope().isSelected : true;
                                 childs[i].scope().$apply();
                             } else {
                                 if (checkElementHitting(transformBox(childs[i].prop('offsetLeft'), childs[i].prop('offsetTop'), childs[i].prop('offsetLeft') + childs[i].prop('offsetWidth'), childs[i].prop('offsetTop') + childs[i].prop('offsetHeight')), transformBox(event.pageX, event.pageY, event.pageX, event.pageY))) {
@@ -218,7 +218,7 @@
                     element.on('mousedown', function(event) {
                         // Prevent default dragging of selected content
                         event.preventDefault();
-                        if (!event.ctrlKey) {
+                        if (!event.shiftKey) {
                             // Skip all selected or selecting items
                             var childs = getSelectableElements(element);
                             for (var i = 0; i < childs.length; i++) {
